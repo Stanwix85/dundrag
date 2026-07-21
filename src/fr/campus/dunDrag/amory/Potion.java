@@ -1,6 +1,6 @@
-package fr.campus.dunDrag;
+package fr.campus.dunDrag.amory;
 
-public class Potion extends DefensiveEquipement{
+public class Potion extends DefensiveEquipement {
     public Potion(String name, int defensivePoints) {
         super(name, "Potion", defensivePoints);
     }
