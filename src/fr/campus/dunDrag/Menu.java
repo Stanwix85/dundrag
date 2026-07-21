@@ -38,7 +38,7 @@ private final Scanner scanner;
             attackpoints = 8;
         }
 
-        System.out.println("/nCharacter created successfully!");
+        System.out.println("\nCharacter created successfully!");
         System.out.println("--> " + name + " the " + type);
         System.out.println("/nYou have " + lifepoints + " life points and " + attackpoints + " attack points, good luck");
 
@@ -46,7 +46,7 @@ private final Scanner scanner;
 
     }
     public boolean openInGameMenu(Character player) {
-        System.out.println("/n--- PAUSE MENU ---");
+        System.out.println("\n--- PAUSE MENU ---");
         System.out.println("1. View Character Stats");
         System.out.println("2. Resume Game");
         System.out.println("3. Quit Game");
@@ -54,19 +54,21 @@ private final Scanner scanner;
 
         String choice = scanner.nextLine().trim();
 
-        switch (choice) {
-            case "1":
+        return switch (choice) {
+            case "1" -> {
                 displayCharacterStats(player);
-                return openInGameMenu(player);
-            case "2":
+                yield openInGameMenu(player);
+            }
+            case "2" -> {
                 System.out.println("resuming game....");
-                return true;
-            case "3":
-                return confirmQuit();
-            default:
+                yield true;
+            }
+            case "3" -> confirmQuit();
+            default -> {
                 System.out.println("Invalid option, please choose again");
-                return openInGameMenu(player);
-        }
+                yield openInGameMenu(player);
+            }
+        };
 
     }
     private void displayCharacterStats(Character player) {

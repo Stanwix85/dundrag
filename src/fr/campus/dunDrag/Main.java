@@ -2,7 +2,7 @@ package fr.campus.dunDrag;
 
 import java.util.Scanner;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
@@ -15,7 +15,7 @@ public class Main {
         System.out.println("--- Your Quest has begun ---");
 
         while (isRunning) {
-            System.out.println("/n Press any key to roll the dice or 'm' for menu: ");
+            System.out.println("\n Press return key to roll the dice or enter 'm' for menu: ");
             String input = scanner.nextLine().trim();
 
             if (input.equalsIgnoreCase("m")) {

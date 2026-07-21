@@ -21,14 +21,27 @@ public class Game {
     }
     public boolean playTurn(Character player) {
         int roll = rollDice();
-        playerPosition += roll;
+        try {
 
-        System.out.println( "\\n\uD83C\uDFB2 " + player.name + " rolled " + roll);
-        if(playerPosition >= total -1) {
-            System.out.println("/n Congratulations " + player.name + " Your quest is complete!!!!");
-            return false;
+            playerPosition += roll;
+
+            System.out.println("\n\uD83C\uDFB2 " + player.name + " rolled " + roll);
+            if (playerPosition == total - 1) {
+                System.out.println("\n Congratulations " + player.name + " Your quest is complete!!!!");
+                return false;
+            }
+            Square currentSquare = boardSquare[playerPosition];
+            System.out.println(player.name + " has reached square " + playerPosition);
+
+            //Square currentSquare = boardSquare[playerPosition];
+            //squareEvent(player, currentSquare)
+            return true;
+        } catch(IndexOutOfBoundsException e){
+            System.out.println("You have crossed over the back of the board");
+            playerPosition -= roll;
+            System.out.println(player.name + " remains on square " + playerPosition);
         }
-        System.out.println( player.name + " has reached square " + playerPosition);
+
 
         //Square currentSquare = boardSquare[playerPosition];
         //squareEvent(player, currentSquare)
@@ -37,6 +50,7 @@ public class Game {
     }
     //public void squareEvent(Character player, Square square)
     //public void seedSquare(){}
+    //public void magicBox
 
     public int getPlayerPosition(){
         return playerPosition;
