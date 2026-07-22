@@ -7,13 +7,13 @@ public class Character extends Person {
     private OffensiveEquipment armeAttack;
     private DefensiveEquipement armeDefense;
 
-    public Character(String type, String name, int lifePoints, int attackPoints, OffensiveEquipment armeAttack, DefensiveEquipement armeDefense) {
+    public Character(String name, String type, int lifePoints, int attackPoints, OffensiveEquipment armeAttack, DefensiveEquipement armeDefense) {
         super(type, name, lifePoints, attackPoints);
         this.armeAttack = armeAttack;
         this.armeDefense = armeDefense;
     }
-    public Character(String type, String name, int lifePoints, int attackPoints) {
-        super(type, name, lifePoints, attackPoints);
+    public Character( String name, String type, int lifePoints, int attackPoints) {
+        super(name, type, lifePoints, attackPoints);
         this.armeAttack = null;
         this.armeDefense = null;
     }
