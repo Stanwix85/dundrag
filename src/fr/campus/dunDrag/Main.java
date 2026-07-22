@@ -1,15 +1,21 @@
 package fr.campus.dunDrag;
 
+import fr.campus.dunDrag.People.Character;
+import fr.campus.dunDrag.function.Game;
+import fr.campus.dunDrag.function.Menu;
+
 import java.util.Scanner;
 
 class Main {
-    public static void main(String[] args) {
+     static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
 
         Character player = menu.createCharacter();
         Game gameBoard = new Game();
         gameBoard.setUpBoard();
+        gameBoard.seedSquare();
+        gameBoard.printBoardDebug();
 
         boolean isRunning = true;
         System.out.println("--- Your Quest has begun ---");

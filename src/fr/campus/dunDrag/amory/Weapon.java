@@ -1,13 +1,14 @@
-package fr.campus.dunDrag;
+package fr.campus.dunDrag.amory;
 
-public class Spell extends OffensiveEquipment{
-    public Spell(String name, int offensivePoints) {
-        super(name, "Spell", offensivePoints);
+public class Weapon extends OffensiveEquipment {
+    public Weapon(String name, int offensivePoints){
+        super(name, "weapon", offensivePoints);
+
     }
 
     @Override
-    public String getType() {
-        return super.getType();
+    public String getName() {
+        return super.getName();
     }
 
     @Override
@@ -16,8 +17,8 @@ public class Spell extends OffensiveEquipment{
     }
 
     @Override
-    public String getName() {
-        return super.getName();
+    public String getType() {
+        return super.getType();
     }
 
     @Override
@@ -37,6 +38,10 @@ public class Spell extends OffensiveEquipment{
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Weapon{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", OffensivePoints=" + OffensivePoints +
+                '}';
     }
 }

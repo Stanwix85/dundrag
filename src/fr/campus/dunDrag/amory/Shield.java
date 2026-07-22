@@ -1,6 +1,6 @@
-package fr.campus.dunDrag;
+package fr.campus.dunDrag.amory;
 
-public class Shield extends DefensiveEquipement{
+public class Shield extends DefensiveEquipement {
     public Shield(String name, int defensivePoints) {
         super(name, "Shield", defensivePoints);
     }
