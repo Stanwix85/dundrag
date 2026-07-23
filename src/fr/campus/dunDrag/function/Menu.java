@@ -14,12 +14,12 @@ private final Scanner scanner;
         System.out.println("===== WELCOME TO DUNGEONS & DRAGONS ===");
 
         System.out.println("Enter your character's name: ");
-        String name = scanner.nextLine().trim();
+        String name = ConsoleUtils.readLine();
 
         String type = "";
         while (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
             System.out.println("Choose your class (Warrior/ Wizard): ");
-            type = scanner.nextLine().trim();
+            type = ConsoleUtils.readLine();
 
             if (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
                 System.out.println("Invalid choice. Please type 'Warrior' or 'Wizard.'");
@@ -39,9 +39,9 @@ private final Scanner scanner;
 
         System.out.println("\nCharacter created successfully!");
         System.out.println("--> " + name + " the " + type);
-        System.out.println("/nYou have " + lifepoints + " life points and " + attackpoints + " attack points, good luck");
+        System.out.println("\n"+ name + " has " + lifepoints + " life points and " + attackpoints + " attack points, good luck");
 
-        return new fr.campus.dunDrag.People.Character(type, name, lifepoints, attackpoints);
+        return new fr.campus.dunDrag.People.Character(name, type, lifepoints, attackpoints);
 
     }
     public boolean openInGameMenu(fr.campus.dunDrag.People.Character player) {
@@ -51,7 +51,7 @@ private final Scanner scanner;
         System.out.println("3. Quit Game");
         System.out.print("Choose an option: ");
 
-        String choice = scanner.nextLine().trim();
+        String choice = ConsoleUtils.readLine();
 
         return switch (choice) {
             case "1" -> {
@@ -75,12 +75,12 @@ private final Scanner scanner;
         System.out.println("Name:   " + player.getName());
         System.out.println("Class:  " + player.getType());
         if(player.getArmeAttack() != null){
-            System.out.println("Weapon: " + player.getArmeAttack());
+            System.out.println("Weapon: " + player.getArmeAttack().getName());
         } else{
             System.out.println("You do not have an weapon");
         }
         if(player.getArmeDefense() != null){
-            System.out.println("Defence weapon: " + player.getArmeDefense());
+            System.out.println("Defence weapon: " + player.getArmeDefense().getName());
         } else{
             System.out.println("You do not have an defence weapon");
         }
@@ -91,8 +91,8 @@ private final Scanner scanner;
     }
     private boolean confirmQuit() {
         System.out.println("Are you sure you want to quit? (y/n): ");
-        String response = scanner.nextLine().trim().toLowerCase();
-        if (response.equals("y") || response.equals("yes")) {
+        String response = ConsoleUtils.readLine();
+        if (response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes")) {
             System.out.println("Thanks for playing! Goodbye.");
             return false;
         }
