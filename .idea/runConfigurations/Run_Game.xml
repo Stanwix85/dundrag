@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Game" type="Application" factoryName="Application">
+    <envs>
+      <env name="DB_PASS" value="Wesbrown04&amp;" />
+      <env name="DB_URL" value="jdbc:postgresql://192.168.65.1:5432/DungDrag" />
+      <env name="DB_USER" value="postgres" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="fr.campus.dunDrag.Main" />
+    <module name="dundrag" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

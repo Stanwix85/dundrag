@@ -22,10 +22,17 @@ public class Game {
     public boolean playTurn(Character player) {
         //Square currentSquare = bboardSquare[playerPosition];
         int roll = rollDice();
-        try {
 
             playerPosition += roll;
-            Square currentSquare = board.getSquare(playerPosition);
+            if (playerPosition >= board.getSize()) {
+                System.out.println("\n\uD83C\uDFB2 " + player.getName() + " rolled " + roll);
+                System.out.println("\nYou overshot the end of the board!");
+                playerPosition -= roll; // Roll back the move
+                System.out.println(player.getName() + " remains on square " + playerPosition);
+                return true;
+            }
+
+            currentSquare = board.getSquare(playerPosition);
 
             System.out.println("\n\uD83C\uDFB2 " + player.getName() + " rolled " + roll);
             if (playerPosition == board.getSize() - 1) {
@@ -54,15 +61,7 @@ public class Game {
 
                 }
                 System.out.println("\n" + player.getName() + " has reached square " + playerPosition);
-
                 return true;
-            } catch(IndexOutOfBoundsException e){
-                System.out.println("You have crossed over the back of the board");
-                playerPosition -= roll;
-                System.out.println(player.getName() + " remains on square " + playerPosition);
-            }
-
-            return true;
         }
 
     }

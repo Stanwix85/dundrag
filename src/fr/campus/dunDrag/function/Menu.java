@@ -1,48 +1,28 @@
 package fr.campus.dunDrag.function;
+import fr.campus.dunDrag.DbQuery.PlayerDAO;
 import fr.campus.dunDrag.People.Character;
-
-import java.util.Scanner;
 
 
 public class Menu {
-private final Scanner scanner;
-    public Menu(){
-        this.scanner = new Scanner(System.in);
-    }
-
     public fr.campus.dunDrag.People.Character createCharacter() {
         System.out.println("===== WELCOME TO DUNGEONS & DRAGONS ===");
 
-        System.out.println("Enter your character's name: ");
-        String name = ConsoleUtils.readLine();
+        String name = askForName();
+        String type = askForClass();
 
-        String type = "";
-        while (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
-            System.out.println("Choose your class (Warrior/ Wizard): ");
-            type = ConsoleUtils.readLine();
-
-            if (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
-                System.out.println("Invalid choice. Please type 'Warrior' or 'Wizard.'");
-            }
-        }
-        int lifepoints;
-        int attackpoints;
-
-        if (type.equalsIgnoreCase("Warrior")) {
-            lifepoints = 10;
-            attackpoints = 5;
-
-        } else {
-            lifepoints = 6;
-            attackpoints = 8;
+        PlayerDAO playerDAO = new PlayerDAO();
+        Character player = playerDAO.createPlayerFromTemplate(name, type);
+        if (player == null){
+            System.out.println("\nFailed to load character template from database. using default character.");
+            return new Character(0,name, type, 10, 5);
         }
 
         System.out.println("\nCharacter created successfully!");
-        System.out.println("--> " + name + " the " + type);
-        System.out.println("\n"+ name + " has " + lifepoints + " life points and " + attackpoints + " attack points, good luck");
+        System.out.println("--> " + player.getName() + " the " + player.getType());
+        System.out.println("\n"+ player.getName() + " has " + player.getLifePoints() + " life points and " + player.getAttackPoints() + " attack points, good luck");
 
-        return new fr.campus.dunDrag.People.Character(name, type, lifepoints, attackpoints);
-
+       //return new fr.campus.dunDrag.People.Character(name, type, lifepoints, attackpoints);
+        return player;
     }
     public boolean openInGameMenu(fr.campus.dunDrag.People.Character player) {
         System.out.println("\n--- PAUSE MENU ---");
@@ -97,6 +77,48 @@ private final Scanner scanner;
             return false;
         }
         return true;
+    }
+    public boolean turnPromt(Character player){
+        System.out.println("\n Press return key to roll the dice or enter 'm' for menu: ");
+        String input = ConsoleUtils.readLine();
+        if (input.equalsIgnoreCase("m")) {
+            return openInGameMenu(player);
+        } return true;
+    }
+    public boolean askToplayAgain() {
+        System.out.println("\n -------------------------------------");
+        System.out.println("\nWould you like to play again? (y/n): ");
+        String choice = ConsoleUtils.readLine();
+        if (!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("yes")) {
+            System.out.println("\nThank you for playing, Goodbye");
+            return false;
+        }
+        return true;
+    }
+    //input functions to keep the menu cleaner
+
+    private String askForName(){
+        String name = "";
+        while(name.equalsIgnoreCase("")){
+            System.out.println("Enter your character's name: ");
+            name = ConsoleUtils.readLine();
+            if (name.equalsIgnoreCase("")) {
+                System.out.println("\nAn adventure must have a name: ");
+            }
+        }
+        return name;
+    }
+    private String askForClass() {
+        String type = "";
+        while (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
+            System.out.println("Choose your class (Warrior/ Wizard): ");
+            type = ConsoleUtils.readLine();
+
+            if (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
+                System.out.println("Invalid choice. Please type 'Warrior' or 'Wizard.'");
+            }
+        }
+        return type;
     }
 
 }
