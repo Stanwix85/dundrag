@@ -23,7 +23,7 @@ class Main {
                }
 
             }
-           keepPlayingGame = menu.askToplayAgain();
+           keepPlayingGame = menu.askToPlayAgain();
 
         } // keepPlaying
 

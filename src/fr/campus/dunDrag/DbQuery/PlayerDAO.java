@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class PlayerDAO {
     public Character createPlayerFromTemplate(String playerName, String chosenType){
-        String sql = "SELECT * FROM class_template WHERE character_type = ?";
+        String sql = "SELECT * FROM class_template WHERE character_type ILIKE ?";
 
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)){

@@ -8,7 +8,7 @@ import java.sql.*;
 public class WeaponDAO {
 
     public OffensiveEquipment createOffWeaponFromTemplate(int classTemplateID) {
-        String sql = "SELECT * FROM attack_weapon WHERE class_template_id = ?";
+        String sql = "SELECT * FROM attack_weapon WHERE class_template_id = ? ORDER BY RANDOM() LIMIT 1";
 
         try (Connection conn = DatabaseConfig.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -35,7 +35,7 @@ public class WeaponDAO {
         return null;
     }
     public DefensiveEquipement createDefWeaponFromTemplate(int classTemplateID) {
-        String sql = "SELECT * FROM defence_weapon WHERE class_template_id = ?";
+        String sql = "SELECT * FROM defence_weapon WHERE class_template_id = ? ORDER BY RANDOM() LIMIT 1";
 
         try (Connection conn = DatabaseConfig.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)){

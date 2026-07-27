@@ -13,8 +13,8 @@ public class Menu {
         PlayerDAO playerDAO = new PlayerDAO();
         Character player = playerDAO.createPlayerFromTemplate(name, type);
         if (player == null){
-            System.out.println("\nFailed to load character template from database. using default character.");
-            return new Character(0,name, type, 10, 5);
+            System.out.println("\n\\n⚠\uFE0F Database connection error while creating character.");
+            return null;
         }
 
         System.out.println("\nCharacter created successfully!");
@@ -85,7 +85,7 @@ public class Menu {
             return openInGameMenu(player);
         } return true;
     }
-    public boolean askToplayAgain() {
+    public boolean askToPlayAgain() {
         System.out.println("\n -------------------------------------");
         System.out.println("\nWould you like to play again? (y/n): ");
         String choice = ConsoleUtils.readLine();
@@ -109,16 +109,17 @@ public class Menu {
         return name;
     }
     private String askForClass() {
-        String type = "";
-        while (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
+        while(true) {
             System.out.println("Choose your class (Warrior/ Wizard): ");
-            type = ConsoleUtils.readLine();
+            String type = ConsoleUtils.readLine();
 
-            if (!type.equalsIgnoreCase("Warrior") && !type.equalsIgnoreCase("Wizard")) {
-                System.out.println("Invalid choice. Please type 'Warrior' or 'Wizard.'");
+            if (type.equalsIgnoreCase("Warrior") ||type.equalsIgnoreCase("Wizard")) {
+                return  type.substring(0,1).toUpperCase() + type.substring(1).toLowerCase();
+
             }
+            System.out.println("Invalid choice. Please type 'Warrior' or 'Wizard.'");
         }
-        return type;
+
     }
 
 }

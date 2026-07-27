@@ -18,13 +18,7 @@ public class BoxManager {
         } else if (player.getArmeDefense() != null) {
                 offOrDef = 10;
         }
-        int templateId;
-        if (player.getType().equalsIgnoreCase("wizard")) {
-
-            templateId = 1;
-        } else {
-            templateId = 2;
-        }
+        int templateId = player.getType().equalsIgnoreCase("wizard") ? 1:2;
 
         if (offOrDef <= 50) {
             OffensiveEquipment newWeapon = weaponDAO.createOffWeaponFromTemplate(templateId);
@@ -32,16 +26,18 @@ public class BoxManager {
                 player.setArmeAttack(newWeapon);
                 weaponDAO.saveAttWeaponToPlayer(player, newWeapon);
                 System.out.print("\n" + player.getName() + " has discovered a " + newWeapon.getName());
-
+            }
 
             } else {
-                DefensiveEquipement newDefence = weaponDAO.createDefWeaponFromTemplate(templateId);
-                if (newDefence != null) {
-                    player.setArmeDefense(newDefence);
-                    System.out.print("\n" + player.getName() + " has discovered a " + newDefence.getName());
-                }
-
+            DefensiveEquipement newDefence = weaponDAO.createDefWeaponFromTemplate(templateId);
+            if (newDefence != null) {
+                player.setArmeDefense(newDefence);
+                weaponDAO.saveDefWeaponToPlayer(player, newDefence);
+                System.out.print("\n" + player.getName() + " has discovered a " + newDefence.getName());
             }
+
+
+
         }
         } //openbox
 } //boxManger
