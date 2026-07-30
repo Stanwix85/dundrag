@@ -6,16 +6,21 @@ import fr.campus.dunDrag.amory.OffensiveEquipment;
 public class Character extends Person {
     private OffensiveEquipment armeAttack;
     private DefensiveEquipement armeDefense;
+    private int id;
 
-    public Character(String name, String type, int lifePoints, int attackPoints, OffensiveEquipment armeAttack, DefensiveEquipement armeDefense) {
+    public Character(int id, String name, String type, int lifePoints, int attackPoints, OffensiveEquipment armeAttack, DefensiveEquipement armeDefense) {
         super(type, name, lifePoints, attackPoints);
+        this.id = id;
         this.armeAttack = armeAttack;
         this.armeDefense = armeDefense;
+
     }
-    public Character( String name, String type, int lifePoints, int attackPoints) {
+    public Character(int id, String name, String type, int lifePoints, int attackPoints) {
         super(name, type, lifePoints, attackPoints);
+        this.id = id;
         this.armeAttack = null;
         this.armeDefense = null;
+
     }
 
     @Override
@@ -54,19 +59,25 @@ public class Character extends Person {
         this.armeDefense = armeDefense;
     }
 
-
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
         String attackWeaponName = (armeAttack != null) ? armeAttack.getName() : "Unarmed";
         String defenseWeaponName = (armeDefense != null) ? armeDefense.getName() : "None";
         return "Character{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", Attack weapon ='" + armeAttack + '\'' +
-                ", Defensive weapon ='" + armeDefense + '\'' +
-                ", lifePoints=" + lifePoints +
-                ", attackPoints=" + attackPoints +
+                "id='" + id + '\'' +
+                "name='" + getName() + '\'' +
+                ", type='" + getType() + '\'' +
+                ", Attack weapon ='" + attackWeaponName + '\'' +
+                ", Defensive weapon ='" + defenseWeaponName + '\'' +
+                ", lifePoints=" + getLifePoints() +
+                ", attackPoints=" + getAttackPoints() +
                 '}';
     }
 }

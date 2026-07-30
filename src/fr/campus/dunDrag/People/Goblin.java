@@ -5,6 +5,9 @@ public class Goblin extends Person {
     {
         super(name, "Goblin",  6, 1);
     }
+    public Goblin(String name, int lifePoints, int attackPoints){
+        super(name, "Goblin",  lifePoints, attackPoints);
+    }
 
     @Override
     public String toString() {

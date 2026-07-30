@@ -1,9 +1,12 @@
 package fr.campus.dunDrag.function;
 
+import fr.campus.dunDrag.DbQuery.EnemyDAO;
 import fr.campus.dunDrag.People.Dragon;
 import fr.campus.dunDrag.People.Goblin;
 import fr.campus.dunDrag.People.Person;
 import fr.campus.dunDrag.People.Sorcier;
+
+import java.util.List;
 
 public class Board {
     //public static final int total = 64;
@@ -19,33 +22,37 @@ public class Board {
     }
     private void seedSquare() {
         int mysteryBox = 10;
-        Person[] enemies = {new Goblin("Boris"), new Goblin("Carl"), new Sorcier("Simon"), new Sorcier("Tim"), new Dragon("William")};
+        EnemyDAO enemyDAO = new EnemyDAO();
+        List<Person> loadedEnemies = enemyDAO.getAllEnemies();
+        Person[] enemies = loadedEnemies.toArray(new Person[0]);
         int[] placeEnemy = new int[enemies.length];
+        int maxIndex = boardSquare.length -2;
+        int zone = boardSquare.length / 8;
         for (int b = 0; b < mysteryBox; b++) {
             int randombox;
             if (b < 2) {
-                randombox = ConsoleUtils.numGenrate(24) + 1;
+                randombox = ConsoleUtils.numGenrate(zone * 2);
             } else if (b < 4) {
-                randombox = 25 + ConsoleUtils.numGenrate( 25);
+                randombox = (zone * 3)  + ConsoleUtils.numGenrate( zone * 2 );
             } else {
-                randombox = 1 + ConsoleUtils.numGenrate(49);
+                randombox = ConsoleUtils.numGenrate(maxIndex);
             }
             while (boardSquare[randombox].mysteryBox) {
-                randombox = 1 + ConsoleUtils.numGenrate (49);
+                randombox = ConsoleUtils.numGenrate (zone * 6);
             }
             boardSquare[randombox].mysteryBox = true;
         }
         for (int e = 0; e < enemies.length; e++) {
             int randombox;
-            if (e < 2) {
-                randombox = 5 + ConsoleUtils.numGenrate(24);
-            } else if (e < 4) {
-                randombox = 28 + ConsoleUtils.numGenrate(25);
+            if (enemies[e].getType().equalsIgnoreCase("Goblin")) {
+                randombox = zone + ConsoleUtils.numGenrate(zone * 2 );
+            } else if (enemies[e].getType().equalsIgnoreCase("Sorcier")) {
+                randombox = (zone * 3) + ConsoleUtils.numGenrate(zone * 2);
             } else {
-                randombox = 45 + ConsoleUtils.numGenrate (19);
+                randombox = (zone * 5) + ConsoleUtils.numGenrate (maxIndex- (zone * 5));
             }
             while (boardSquare[randombox].mysteryBox || boardSquare[randombox].enemy != null) {
-                randombox = 25 + ConsoleUtils.numGenrate (37);
+                randombox = (zone * 3) + ConsoleUtils.numGenrate (maxIndex - (zone * 3));
             }
             placeEnemy[e] = randombox;
             boardSquare[randombox].enemy = enemies[e];

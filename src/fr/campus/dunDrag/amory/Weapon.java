@@ -1,8 +1,8 @@
 package fr.campus.dunDrag.amory;
 
 public class Weapon extends OffensiveEquipment {
-    public Weapon(String name, int offensivePoints){
-        super(name, "weapon", offensivePoints);
+    public Weapon(int id, String name, String type,  int offensivePoints){
+        super(id, name,type, offensivePoints);
 
     }
 
