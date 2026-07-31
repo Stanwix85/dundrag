@@ -24,7 +24,8 @@ public class Menu {
        //return new fr.campus.dunDrag.People.Character(name, type, lifepoints, attackpoints);
         return player;
     }
-    public boolean openInGameMenu(fr.campus.dunDrag.People.Character player) {
+    public boolean openInGameMenu(Character player) {
+        while (true){
         System.out.println("\n--- PAUSE MENU ---");
         System.out.println("1. View Character Stats");
         System.out.println("2. Resume Game");
@@ -33,21 +34,22 @@ public class Menu {
 
         String choice = ConsoleUtils.readLine();
 
-        return switch (choice) {
-            case "1" -> {
+        switch (choice) {
+            case "1":
                 displayCharacterStats(player);
-                yield openInGameMenu(player);
-            }
-            case "2" -> {
+                break;
+            case "2":
                 System.out.println("resuming game....");
-                yield true;
-            }
-            case "3" -> confirmQuit();
-            default -> {
+                return true;
+
+            case "3":
+                return confirmQuit();
+            default:
                 System.out.println("Invalid option, please choose again");
-                yield openInGameMenu(player);
+                break;
             }
-        };
+
+        }
 
     }
     private void displayCharacterStats(Character player) {

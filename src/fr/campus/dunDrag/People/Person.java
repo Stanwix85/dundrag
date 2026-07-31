@@ -1,11 +1,11 @@
 package fr.campus.dunDrag.People;
 
-public class Person {
+public  abstract class Person {
 
-        String name;
-        String type;
-        int lifePoints;
-        int attackPoints;
+        protected String  name;
+        protected String type;
+        protected int lifePoints;
+        protected int attackPoints;
 
         public Person( String name, String type, int lifePoints, int attackPoints) {
             this.name = name;

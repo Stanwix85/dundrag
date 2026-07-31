@@ -1,4 +1,5 @@
 package fr.campus.dunDrag.function;
+import fr.campus.dunDrag.DbQuery.DatabaseConfig;
 import fr.campus.dunDrag.DbQuery.WeaponDAO;
 import fr.campus.dunDrag.People.Character;
 import fr.campus.dunDrag.amory.*;
@@ -9,7 +10,8 @@ public class BoxManager {
 
         if (player.getArmeAttack() != null && player.getArmeDefense() != null) {
             System.out.println("\n" + player.getName() + " is fully equipped, you cannot carry any more.");
-            return;}
+            return;
+        }
 
         int offOrDef = ConsoleUtils.numGenrate(100);
 
@@ -28,7 +30,7 @@ public class BoxManager {
                 System.out.print("\n" + player.getName() + " has discovered a " + newWeapon.getName());
             }
 
-            } else {
+        } else {
             DefensiveEquipement newDefence = weaponDAO.createDefWeaponFromTemplate(templateId);
             if (newDefence != null) {
                 player.setArmeDefense(newDefence);
@@ -38,6 +40,6 @@ public class BoxManager {
 
 
 
-        }
-        } //openbox
+        }//else
+        } //open box
 } //boxManger

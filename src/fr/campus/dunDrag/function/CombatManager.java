@@ -7,7 +7,7 @@ import fr.campus.dunDrag.People.Person;
 
 public class CombatManager {
     private static final CombatDAO combatDAO = new CombatDAO();
-    public static boolean combat(Character player, Person adversary) {
+    public boolean combat(Character player, Person adversary) {
       combatDAO.downloadPlayerStats(player);
 
         int totalPlayerAttack = player.getAttackPoints();
