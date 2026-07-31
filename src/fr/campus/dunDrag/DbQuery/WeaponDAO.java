@@ -21,12 +21,7 @@ public class WeaponDAO {
                     String type = rs.getString("weapon_type"); //i might not need this field
                     int attackPoints = rs.getInt("attack_points");
 
-                    if("Spell".equalsIgnoreCase(type)) {
-                        return new Spell(id, name, type, attackPoints);
-
-                    }else {
-                        return new Weapon(id, name, type, attackPoints);
-                    }
+                 return EquipmentFactory.createOffensive(id, name, type, attackPoints);
                 }
             }
         } catch (SQLException e) {
@@ -48,12 +43,8 @@ public class WeaponDAO {
                     String type = rs.getString("weapon_type");
                     int defencePoints = rs.getInt("defence_points");
 
-                    if ("Potion".equalsIgnoreCase(type)) {
-                        return new Potion(id, name, type, defencePoints);
-                    }else {
-
-                    return new Shield(id, name, type, defencePoints);
-                }}
+                    return EquipmentFactory.createDefensive(id, name, type, defencePoints);
+                }
             }
         } catch (SQLException e) {
             System.err.println("Error creating weapon from template: " + e.getMessage());

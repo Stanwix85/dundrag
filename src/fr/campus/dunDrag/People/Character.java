@@ -9,7 +9,7 @@ public class Character extends Person {
     private int id;
 
     public Character(int id, String name, String type, int lifePoints, int attackPoints, OffensiveEquipment armeAttack, DefensiveEquipement armeDefense) {
-        super(type, name, lifePoints, attackPoints);
+        super(name, type, lifePoints, attackPoints);
         this.id = id;
         this.armeAttack = armeAttack;
         this.armeDefense = armeDefense;
@@ -23,25 +23,6 @@ public class Character extends Person {
 
     }
 
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(name);
-    }
-
-    @Override
-    public String getType() {
-        return super.getType();
-    }
-
-    @Override
-    public void setType(String type) {
-        super.setType(type);
-    }
 
     public OffensiveEquipment getArmeAttack() {
         return armeAttack;

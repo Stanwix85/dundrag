@@ -3,15 +3,12 @@ package fr.campus.dunDrag.function;
 
 import fr.campus.dunDrag.People.Person;
 
-
-
-
 public class Square {
-        boolean mysteryBox;
-        Person enemy;
+        private boolean mysteryBox;
+        private Person enemy;
 
 
-        Square(){
+        public Square(){
             this.enemy = null;
             this.mysteryBox = false;
         }

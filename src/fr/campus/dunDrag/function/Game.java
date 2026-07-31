@@ -7,21 +7,25 @@ import fr.campus.dunDrag.People.Character;
 import fr.campus.dunDrag.amory.*;
 
 
-
+//https://github.com/le-campus-numerique/Java_D-D_IA
 
 public class Game {
     private int playerPosition = 0;
-    Board board = new Board(64);
-    Square currentSquare = board.getSquare(playerPosition);
 
 
-    public int rollDice() {
-        return ConsoleUtils.numGenrate(6);
+    private Board board = BoardFactory.createBoard(ConsoleUtils.DEFAULT_BOARD_SIZE);
+    private Square currentSquare;
+    private CombatManager combatManager = new CombatManager();
+
+    public Game() {
+        this.currentSquare = board.getSquare(playerPosition);
     }
+
+
 
     public boolean playTurn(Character player) {
         //Square currentSquare = bboardSquare[playerPosition];
-        int roll = rollDice();
+        int roll = ConsoleUtils.rollDice();
 
             playerPosition += roll;
             if (playerPosition >= board.getSize()) {
@@ -42,7 +46,7 @@ public class Game {
            // currentSquare = boardSquare[playerPosition];
             Person adversary = currentSquare.getEnemy();
             if (adversary != null) {
-                boolean winner = CombatManager.combat(player, adversary);
+                boolean winner = combatManager.combat(player, adversary);
                 if (winner) {
                     System.out.print("\n" + adversary.getName() + " is a very tough " + adversary.getType() + "! But you have killed him, continue on your quest ");
                     ConsoleUtils.pause(800);
@@ -65,4 +69,3 @@ public class Game {
         }
 
     }
-
